@@ -19,7 +19,7 @@ export const ResultMoviePage = () => {
 
     useEffect(() => {
 
-        Object.keys(user1).length === 0 ||  Object.keys(user2).length === 0 && navigate('/')
+        Object.keys(user1).length === 0 ||  Object.keys(user2).length === 0 && navigate('./')
       
     }, [])
     
@@ -61,7 +61,7 @@ export const ResultMoviePage = () => {
     const handleBack = () =>{
         dispatch( onClear ())
         dispatch( onClearUi())
-        navigate('/')
+        navigate('./')
     }
 
     return (

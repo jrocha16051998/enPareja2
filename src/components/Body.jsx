@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import { Info } from './Info'
 import { BtnToTop } from './BtnToTop'
 import { Element } from 'react-scroll'
+import { Footer } from './Footer'
 
 export const Body = () => {
     const navigate = useNavigate()
@@ -24,7 +25,7 @@ export const Body = () => {
         <div className='container'>
             <div className='row justify-content-between'> 
                 <div className='col-lg-6 col-md-12'>
-                    <h5 className='pt-5 text-center'>Humano 1, elige la pelicula que quieras ver</h5>
+                    <h5 className='pt-5 text-center'>Humano 1, elige la película que quieras ver</h5>
                     <Element name='search1' >
                         <Search user={ 1 }/>
                     </Element>
@@ -37,7 +38,7 @@ export const Body = () => {
                 </div>
                 
                 <div className='col-lg-6 col-md-12'>
-                    <h5 className='pt-5 text-center'>Humano 2, elige la pelicula que quieras ver</h5>
+                    <h5 className='pt-5 text-center'>Humano 2, elige la película que quieras ver</h5>
                     <Element name='search2' >
                         <Search user={ 2 } />
                     </Element>
@@ -64,6 +65,7 @@ export const Body = () => {
             </Element>
             
             <BtnToTop />
+            <Footer />
             
 
 

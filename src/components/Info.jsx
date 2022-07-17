@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Info = () => {
     return (
-        <div className='container'>
+        <div className='container align-items-center'>
             <div className='row text-center'>
                 <div className='row'>
                     <hr />
@@ -13,7 +13,7 @@ export const Info = () => {
                     </p>
                     <hr />
                 </div>
-                <div>
+                <div className='row text-center'>
                     <h3> ¿Cómo se encuentra la película recomendada? </h3>
                     <p className='p-1'>
                     Para encontrar la película recomendada se obienten películas similares a cada una de las seleccionadas
@@ -26,7 +26,7 @@ export const Info = () => {
                     </p>
                     <hr />
                 </div>
-                <div className='row'>
+                <div className='row text-center'>
                     <h5>Agradecimientos</h5>
                     <p className='p-1'>
                     Esta Pagina se pudo realizar gracias al API de <a href='https://www.themoviedb.org/' target='_blank' rel='noopener noreferrer'> The Movie DB</a> la cual 

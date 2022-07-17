@@ -110,3 +110,10 @@ p:hover{
 .li-results:hover{
   cursor: pointer;
 }
+
+.img-footer{
+  width: 30px;
+  height: 30px;
+  
+  margin-bottom: 20px;
+}

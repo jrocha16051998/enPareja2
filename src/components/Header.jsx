@@ -20,9 +20,9 @@ export const Header = () => {
     
     return (
         <nav className="navbar shadow header mb-1">
-            <div className="container-fluid justify-content-center">
+            <div className="container justify-content-center">
                 <a className="navbar-brand" onClick={ toMain }><h4 className='display-6 text-header'>💏  EnPareja2  💏</h4></a>
-                <button className='btn btn-outline-secondary top-25 align-end' onClick={ handleBtnInfo }>Info</button>
+                <button className='btn btn-outline-secondary' onClick={ handleBtnInfo }>Info</button>
                 <hr />
             </div>
         </nav>

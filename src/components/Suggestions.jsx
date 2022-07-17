@@ -32,7 +32,7 @@ export const Suggestions = () => {
     return (
         <div className='container'>
             <h4 className='pt-4 text-center'>Populares de hoy</h4>
-            <div className="row pt-2 justify-content-center m-1">
+            <div className="row pt-2 m-1 justify-content-center ">
                 
                 { 
                     results.map( movie =>(

@@ -15,9 +15,12 @@ export const Suggestions = () => {
         if(Object.keys(selectedMovie.user1).length === 0) {
             dispatch( onSelectMovie1( {movie} ))
             scroller.scrollTo('search1')
+            
         }else{
             dispatch( onSelectMovie2( {movie} ))
             scroller.scrollTo('search2')
+            
+
         }
             
         

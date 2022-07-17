@@ -7,6 +7,10 @@ import { Header } from './Header'
 import { ResultCard } from './ResultCard'
 import { Spiner } from './Spiner'
 import { onClearUi } from '../store/uiSclice'
+import { Element } from 'react-scroll'
+import { Info } from './Info'
+import { BtnToTop } from './BtnToTop'
+import { animateScroll as scroll} from 'react-scroll'
 
 
 
@@ -16,25 +20,41 @@ export const ResultMoviePage = () => {
     const [page, setPage] = useState ( 1 )
     const { selectedMovie, arrayBase, recomendedMovie, match, noRecomended} = useSelector( state => state.search)
     const { user1, user2 }  = selectedMovie
+    scroll.scrollToTop({duration: 20, smooth:true})
+    
 
     useEffect(() => {
+        
+        if(Object.keys(user1).length === 0 || Object.keys(user2).length === 0 ) {
+            dispatch( onClear() )
+            dispatch( onClearUi())
+            navigate('/')
+        }else{
+            
+            if(user1.id === user2.id){
+                dispatch(onMatch())
+                dispatch(addRecomendedMovie(user1))
+            }
 
-        Object.keys(user1).length === 0 ||  Object.keys(user2).length === 0 && navigate('./')
-      
-    }, [])
+        }
+        
     
-    if(user1.id === user2.id){
-        dispatch(onMatch())
-        dispatch(addRecomendedMovie(user1))
-    }
+        
+    }, [])
+
+
+    console.log(user1)
     !match 
+
     &&
+    console.log(user1)
     console.log('')
     let id = user1.id
     const { data: data1, isSuccess: isSuccess1} = useGetSimilarQuery({ id, page })
     
     id  = user2.id 
     const { data: data2 , isSuccess: isSuccess2} = useGetSimilarQuery({ id , page  })
+
     useEffect(() => {
         if( isSuccess1 && isSuccess2 && match === false && noRecomended === false){
         
@@ -51,17 +71,17 @@ export const ResultMoviePage = () => {
             !match && setPage( page +1) 
         }
         
-    
-    }, [isSuccess1, isSuccess2, match, noRecomended])
+        page > 99 && dispatch( onNoRecomended() )
+    }, [isSuccess1 ,isSuccess2])
     
    
 
-    page > 100 && dispatch( onNoRecomended() )
+   
 
     const handleBack = () =>{
         dispatch( onClear ())
         dispatch( onClearUi())
-        navigate('./')
+        navigate('/')
     }
 
     return (
@@ -75,25 +95,27 @@ export const ResultMoviePage = () => {
             {
                 match && 
                     <>
-                        <ResultCard id={ recomendedMovie.id }/>
+                        <ResultCard id={ recomendedMovie.id } page={page}/>
                         
                     </>
                     
             }
             {
                 noRecomended && 
-                    <div className='container'>
+                    <div className='container mb-3'>
 
                         <div className='row justify-content-center'>
-                            <h5 className='ml-4 p-5 text-center '>No se ha encontrado ninguna recomendacion, por favor intentelo nuevamente con otras peliculas</h5>
-                            <button className='btn btn-outline-success w-25 h-25' onClick={ handleBack}> Volver </button>
+                            <h5 className='ml-4 p-5 text-center '>No se ha encontrado ninguna recomendación, por favor intentelo nuevamente con otras peliculas</h5>
+                            <button className='btn btn-outline-success w-25 h-25' onClick={ handleBack }> Volver </button>
                         </div>
                         
                     </div>
             }
             
-            
-        
+            <BtnToTop />
+            <Element name='info'>
+                <Info />
+            </Element>
         </>
     )
 }

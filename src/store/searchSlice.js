@@ -45,6 +45,9 @@ export const searchSlice = createSlice({
         onClear:( state) =>{
             state.noRecomended = false
             state.isSelected = false
+            state.selectedMovie.user1 = {}
+            state.selectedMovie.user2 = {}
+            state.match = false
         }
 
     },

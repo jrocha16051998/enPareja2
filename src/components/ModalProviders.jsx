@@ -43,11 +43,17 @@ export const ModalProvider = ( {id}) => {
                     contentLabel="modal results providers"
                     
                 >
-                    <h2 className='pb-3'>¿Dónde ver?</h2>
+                    
                     <div className='container'>
+                        <div className='row'>
+                            <h2 className='pb-3 col-8 text-start'>¿Dónde ver?</h2>
+                            <button type="button col-4" className=" position-absolute btn-close mr-1 mt-1 end-0 m-3" aria-label="Close" onClick={closeModal}></button>
+                        </div>
+                        
                         <div className='row justify-content-around'>
                             <div className='col-lg-3 row-md'>
                                 <h5>Con subscripción</h5>
+
                                 <ul>
                                     {
                                         data.results.ES?.flatrate?.map( provider =>(
@@ -75,10 +81,10 @@ export const ModalProvider = ( {id}) => {
                             <div className='col-lg-3 row-md'>
                                 <h5>Alquilar</h5>
                                 <ul>
-                                    {
+                                    { //TODO: hacer href a cada pelicula a su distribuidor
                                         data.results.ES?.rent?.map( provider =>(
                                             <li key={provider.provider_id} className='p-1'>
-                                                { provider.provider_name + ' '}
+                                                <a href='https://rakuten.tv/es/movies/los-pitufos-2' target='_blank' rel='noopener noreferrer'> { provider.provider_name + ' '}</a>
                                                 <img src={`https://image.tmdb.org/t/p/w500/${provider.logo_path}`} className='logo'/>  
                                             </li>
                                         ))

@@ -50,6 +50,7 @@ li:hover{
 .btn-outline-success{
   border-color: #748DA6;
   color: darkslategrey;
+  box-shadow: 5px, 5px;
 }
 .btn-outline-success:hover {
   border-color: #748DA6;
@@ -84,4 +85,22 @@ li:hover{
 }
 .card-result:hover{
   cursor:default
+}
+.text-header:hover{
+  cursor: pointer;
+}
+li:hover{
+  cursor:text;
+}
+p:hover{
+  cursor:text;
+}
+.recomendation-text-high{
+  color: green;
+}
+.recomendation-text-mid{
+  color: yellow;
+}
+.recomendation-text-low{
+  color: red;
 }

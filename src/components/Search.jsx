@@ -33,7 +33,7 @@ export const Search = ({ user }) => {
         <div className="container">
             <div className="row justify-content-center align-items-center">
                 <input 
-                    className="form-control m-2 w-50 col-xs-12" 
+                    className="form-control m-2 w-50 col-xs-12 animate__animated animate__pulse" 
                     type="search" placeholder="Search" 
                     aria-label="Search"
                     name='search'

@@ -23,6 +23,11 @@ export const movieApi = createApi({
         getProviders: builder.query({
             query: ( id  )=> `/movie/${id}/watch/providers?api_key=a30e7af22666dc349879f045ce0a98fd`
         }),
+        getDiscover: builder.query({
+            query: ({genresIds, optionsToWatch} )=> `/movie?api_key=a30e7af22666dc349879f045ce0a98fd&language=es-ES&sort_by=popularity.desc&include_adult=false&include_video=false&page=1${optionsToWatch}&with_genres=${genresIds}`
+        }),
+
     })
 })
 export const { useGetPopularQuery, useGetMovieByIdQuery, useGetSearchQuery, useGetSimilarQuery, useGetProvidersQuery} = movieApi
+

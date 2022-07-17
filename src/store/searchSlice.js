@@ -48,6 +48,7 @@ export const searchSlice = createSlice({
             state.selectedMovie.user1 = {}
             state.selectedMovie.user2 = {}
             state.match = false
+            state.arrayBase = []
         }
 
     },

@@ -9,8 +9,8 @@ export const makerLinkProvider = ( provider, titulo ) =>{
         return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
     } 
     switch (provider) {
-        
     case 10:
+    case 119:
         return link.concat(linksProviders.primeVideo, encodeURI(titulo))
         
     case 35:
@@ -21,7 +21,7 @@ export const makerLinkProvider = ( provider, titulo ) =>{
 
         return link.concat(linksProviders.rakuten,transform)
         
-    case 'netflix':
+    case 8:
         return link.concat(linksProviders.netflix, encodeURI(titulo))
         
     case 337:

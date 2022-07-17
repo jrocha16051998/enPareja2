@@ -20,8 +20,13 @@ export const ResultMoviePage = () => {
     const [page, setPage] = useState ( 1 )
     const { selectedMovie, arrayBase, recomendedMovie, match, noRecomended} = useSelector( state => state.search)
     const { user1, user2 }  = selectedMovie
-    scroll.scrollToTop({duration: 20, smooth:true})
+    useEffect(() => {
+        
+        scroll.scrollToTop({duration: 20, smooth:true})
     
+    }, [])
+    
+ 
 
     useEffect(() => {
         
@@ -67,7 +72,7 @@ export const ResultMoviePage = () => {
             !match && setPage( page +1) 
         }
         
-        page === 100 && dispatch( onNoRecomended() )
+        page === 100  && dispatch( onNoRecomended() )
     }, [isSuccess1 ,isSuccess2])
     
    

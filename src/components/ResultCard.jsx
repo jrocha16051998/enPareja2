@@ -55,7 +55,7 @@ export const ResultCard = ( {id, page} ) => {
                                     ${recomendationLvl > 79 
                                         ? 'recomendation-text-high' 
                                         : recomendationLvl < 79 
-                                        && recomendationLvl > 21 
+                                        && recomendationLvl > 20 
                                         ?  'recomendation-text-mid' 
                                         : recomendationLvl < 21 && 'recomendation-text-low' }
                                      `}> 

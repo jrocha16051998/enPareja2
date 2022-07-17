@@ -1,7 +1,4 @@
-html{
-  
-  box-sizing: border-box;
-}
+
 ::-webkit-scrollbar{
   background-color: #9CB4CC;
   width: 0.7rem;
@@ -15,6 +12,10 @@ html{
 ::-webkit-scrollbar-thumb{
   background-color: #9CB4CC;
   border-radius: 10px;
+}
+html{
+  
+  box-sizing: border-box;
 }
 body {
   margin: 0;
@@ -72,11 +73,13 @@ li:hover{
   background-color: #F2D7D9;
   
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.7rem;
   font-weight: bold;
   border-width: 3px;
   border-color: #748DA6;
   text-align: center;
+  
+  padding-bottom: 2px;
 }
 .btn-to-top:hover{
   width: 3.2rem;
@@ -103,4 +106,7 @@ p:hover{
 }
 .recomendation-text-low{
   color: red;
+}
+.li-results:hover{
+  cursor: pointer;
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import Modal from 'react-modal'
 import { useDispatch, useSelector } from 'react-redux'
+import { makerLinkProvider } from '../helpers/makerLinkProvider'
 import { useGetProvidersQuery } from '../store/apis/moviesApi'
 import { onModalChange } from '../store/uiSclice'
 
@@ -12,7 +13,7 @@ const customStyles = {
         bottom: 'auto',
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
-        borderRadius: '5%',
+        borderRadius: '10px',
         width: '60%'
     },
 }
@@ -22,7 +23,8 @@ Modal.setAppElement('#root')
 export const ModalProvider = ( {id}) => {
    
     const { isModalOpen } = useSelector( state => state.ui)
-   
+    const { recomendedMovie } = useSelector( state => state.search)
+    
     const dispatch = useDispatch()
 
     function closeModal() {
@@ -47,7 +49,12 @@ export const ModalProvider = ( {id}) => {
                     <div className='container'>
                         <div className='row'>
                             <h2 className='pb-3 col-8 text-start'>¿Dónde ver?</h2>
-                            <button type="button col-4" className=" position-absolute btn-close mr-1 mt-1 end-0 m-3" aria-label="Close" onClick={closeModal}></button>
+                            <button 
+                                type="button col-4" 
+                                className=" position-absolute btn-close mr-1 mt-1 end-0 m-3" 
+                                aria-label="Close" 
+                                onClick={closeModal}>
+                            </button>
                         </div>
                         
                         <div className='row justify-content-around'>
@@ -58,7 +65,9 @@ export const ModalProvider = ( {id}) => {
                                     {
                                         data.results.ES?.flatrate?.map( provider =>(
                                             <li key={provider.provider_id} className='p-1'>
-                                                { provider.provider_name + ' '}
+                                                <a 
+                                                    href={ makerLinkProvider(provider.provider_id, recomendedMovie.title )} 
+                                                    target='_blank' rel='noopener noreferrer'> { provider.provider_name + ' '}</a>
                                                 <img src={`https://image.tmdb.org/t/p/w500/${provider.logo_path}`} className='logo'/>  
                                             </li>
                                         ))
@@ -71,7 +80,9 @@ export const ModalProvider = ( {id}) => {
                                     {
                                         data.results.ES?.buy?.map( provider =>(
                                             <li key={provider.provider_id} className='p-1'>
-                                                { provider.provider_name + ' '}
+                                                <a 
+                                                    href={ makerLinkProvider(provider.provider_id, recomendedMovie.title )} 
+                                                    target='_blank' rel='noopener noreferrer'> { provider.provider_name + ' '}</a>
                                                 <img src={`https://image.tmdb.org/t/p/w500/${provider.logo_path}`} className='logo'/>  
                                             </li>
                                         ))
@@ -84,7 +95,9 @@ export const ModalProvider = ( {id}) => {
                                     { //TODO: hacer href a cada pelicula a su distribuidor
                                         data.results.ES?.rent?.map( provider =>(
                                             <li key={provider.provider_id} className='p-1'>
-                                                <a href='https://rakuten.tv/es/movies/los-pitufos-2' target='_blank' rel='noopener noreferrer'> { provider.provider_name + ' '}</a>
+                                                <a 
+                                                    href={ makerLinkProvider(provider.provider_id, recomendedMovie.title )} 
+                                                    target='_blank' rel='noopener noreferrer'> { provider.provider_name + ' '}</a>
                                                 <img src={`https://image.tmdb.org/t/p/w500/${provider.logo_path}`} className='logo'/>  
                                             </li>
                                         ))
@@ -100,7 +113,7 @@ export const ModalProvider = ( {id}) => {
                     onRequestClose={closeModal}
                     style={customStyles}
                     contentLabel="modal no reults">
-                    <h3>Upsss.. parece que no hay provedores de streaming `legales` que tengan esta pelicula</h3>
+                    <h3>Upsss.. parece que no hay provedores de streaming  que tengan esta pelicula</h3>
                 </Modal>
             
             }

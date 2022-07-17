@@ -9,7 +9,6 @@ import { Spiner } from './Spiner'
 export const ResultCard = ( {id, page} ) => {
     const dispatch = useDispatch()
     const { data, isLoading, isSuccess } = useGetMovieByIdQuery( id )
-    console.log(page)
     const recomendationLvl = (100 - page) 
     const handleOpenModal = () =>{
         dispatch( onModalChange() )

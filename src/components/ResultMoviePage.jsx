@@ -43,21 +43,17 @@ export const ResultMoviePage = () => {
     }, [])
 
 
-    console.log(user1)
-    !match 
-
-    &&
-    console.log(user1)
-    console.log('')
+    
     let id = user1.id
     const { data: data1, isSuccess: isSuccess1} = useGetSimilarQuery({ id, page })
     
     id  = user2.id 
     const { data: data2 , isSuccess: isSuccess2} = useGetSimilarQuery({ id , page  })
-
+    
     useEffect(() => {
-        if( isSuccess1 && isSuccess2 && match === false && noRecomended === false){
         
+        if( isSuccess1 && isSuccess2 && match === false && noRecomended === false){
+           
             dispatch( addToArrayBase( data1.results ) )
             arrayBase.map( movie =>{
                 data2.results.map( movie2 =>{
@@ -71,7 +67,7 @@ export const ResultMoviePage = () => {
             !match && setPage( page +1) 
         }
         
-        page > 99 && dispatch( onNoRecomended() )
+        page === 100 && dispatch( onNoRecomended() )
     }, [isSuccess1 ,isSuccess2])
     
    

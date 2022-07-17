@@ -35,7 +35,7 @@ export const Suggestions = () => {
             <div className="row pt-2 justify-content-center m-1">
                 
                 { 
-                    results.slice(0,10).map( movie =>(
+                    results.map( movie =>(
                         <div key={movie.id} className="card col-lg-2 col-md-3 col-sm-4 m-2 p-0 shadow-lg" onClick={()=>  handleClickMovie(movie) }>
                             <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} className="card-img " alt={movie.title} />
                             <div className="card-body">
@@ -51,7 +51,7 @@ export const Suggestions = () => {
     
     
             </div>
-            <hr />
+            
         </div>
     )
 }

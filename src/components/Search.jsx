@@ -14,7 +14,7 @@ export const Search = ({ user }) => {
     const { results = [] } = data
 
     useEffect(() => {
-        results.length >1 && dispatch( onSearch( { results, user}))
+        results.length > 1 && dispatch( onSearch( { results, user} ))
         
         
     }, [results])
@@ -26,7 +26,7 @@ export const Search = ({ user }) => {
     const handleSearch = async () =>{
         setToSearch( formSearch )
         
-        dispatch( onSearch( { results, user}))
+        dispatch( onSearch( { results, user} ))
     }
     
     return (

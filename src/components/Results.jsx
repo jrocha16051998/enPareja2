@@ -18,7 +18,7 @@ export const Results = (  ) => {
                         results.map(movie =>(
                             <li
                                 key={movie.id} 
-                                className="list-group-item"
+                                className="list-group-item li-results"
                                 onClick={() => handleSelectMovie( movie )}
                             >{ movie.title }</li>
                         ))

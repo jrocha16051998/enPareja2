@@ -1,15 +1,16 @@
 import React from 'react'
+    
 import { useDispatch } from 'react-redux'
-
 import { useGetMovieByIdQuery } from '../store/apis/moviesApi'
 import { onModalChange } from '../store/uiSclice'
 import { ModalProvider } from './ModalProviders'
 import { Spiner } from './Spiner'
 
-export const ResultCard = ( {id} ) => {
+export const ResultCard = ( {id, page} ) => {
     const dispatch = useDispatch()
     const { data, isLoading, isSuccess } = useGetMovieByIdQuery( id )
-
+    console.log(page)
+    const recomendationLvl = (100 - page) 
     const handleOpenModal = () =>{
         dispatch( onModalChange() )
     }
@@ -24,7 +25,7 @@ export const ResultCard = ( {id} ) => {
                 isSuccess 
                 &&
                     
-                <div className="card m-auto w-75 mt-5 mb-5 shadow-lg card-result">
+                <div className="card m-auto w-75 mt-5 mb-5 shadow-lg card-result animate__animated animate__pulse">
                     <div className="row g-0">
                         <div className="col-md-4">
                             <img src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`} className="img-fluid rounded-start h-100 w-100 " alt= { data.title} />
@@ -50,11 +51,23 @@ export const ResultCard = ( {id} ) => {
                                         ))
                                     }
                                 </ul>
+                                
+                                <h5 className={`
+                                    ${recomendationLvl > 79 
+                                        ? 'recomendation-text-high' 
+                                        : recomendationLvl < 79 
+                                        && recomendationLvl > 21 
+                                        ?  'recomendation-text-mid' 
+                                        : recomendationLvl < 21 && 'recomendation-text-low' }
+                                     `}> 
+                                    {recomendationLvl}% recomendado </h5>
+                            
+                                    
                                 <button 
                                     className='btn btn-primary mt-2' 
-                                    
                                     onClick={ handleOpenModal }
                                 >¿Dónde ver?</button>
+                                
                             </div>
                         </div>
                     </div>

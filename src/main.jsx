@@ -18,7 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <Route path='/' element={<App />} ></Route>
                 <Route path='/result' element={<ResultMoviePage />} ></Route>
                 <Route path='/select-providers' element={<SearchProvider/>} ></Route>
-                <Route path='/*' element={<App />} ></Route>
+                <Route path='*' element={<App />} ></Route>
             </Routes>
         
 

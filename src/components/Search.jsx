@@ -10,7 +10,7 @@ export const Search = ({ user }) => {
     const [toSearch, setToSearch] = useState('')
     const dispatch = useDispatch()
     const [formSearch, setFormSearch] = useState('')
-    const { data = [] } = useGetSearchQuery(toSearch)
+    const { data = [] } = useGetSearchQuery(toSearch, { skip: toSearch.length < 1})
     const { results = [] } = data
 
     useEffect(() => {

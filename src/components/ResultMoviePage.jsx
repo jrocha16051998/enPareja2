@@ -65,14 +65,14 @@ export const ResultMoviePage = () => {
         if(data?.results?.length > 0 ){
             dispatch( addRecomendedMovie( data.results[0]))
             dispatch( onMatch())
-            console.log(' addrecomendd y match')
+            
             
         }else   if( !match && isSuccess ){
             
             genresToAdd.pop()
-            console.log(genresToAdd)
+            
             dispatch(onEditGenresIds ( genresToAdd.toString() ))
-            console.log(' succes y no match')
+           
         }
         
 

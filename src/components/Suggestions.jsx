@@ -19,16 +19,8 @@ export const Suggestions = () => {
         }else{
             dispatch( onSelectMovie2( {movie} ))
             scroller.scrollTo('search2')
-            
-
         }
-            
-        
-            
-        
     }
-    
-    
     return (
         <div className='container'>
             <h4 className='pt-4 text-center'>Populares de hoy</h4>

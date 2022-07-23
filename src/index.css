@@ -81,7 +81,7 @@ li:hover{
   
   padding-bottom: 2px;
 }
-.btn-to-top:hover{
+.btn-to-top :hover{
   width: 3.2rem;
   height: 3.2rem;
   transition: all 1ms ease-out;
@@ -116,4 +116,7 @@ p:hover{
   height: 30px;
   
   margin-bottom: 20px;
+}
+.hover:hover{
+  cursor: pointer;
 }

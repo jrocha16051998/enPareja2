@@ -3,56 +3,78 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export const searchSlice = createSlice({
     name: 'search',
-    initialState:{
-        results :[],
+    initialState: {
+        results: [],
         user: 1,
-        selectedMovie: { user1:{}, user2:{}},
-        isSelected : false,
-        arrayBase:[],
-        recomendedMovie:{},
-        match:false,
+        selectedMovie: { user1: {}, user2: {} },
+        isSelected: false,
+        arrayBase: [],
+        recomendedMovie: {},
+        match: false,
         noRecomended: false,
+        genresIds: '',
+        dataIsLoaded: false,
+        
 
     },
     reducers: {
-        onSearch:(state, { payload }) =>{
+        onSearch: (state, { payload }) => {
             state.results = payload.results,
             state.user = payload.user
             state.isSelected = false
         },
-        onSelectMovie1:(state, { payload }) =>{
-            state.selectedMovie.user1 = {...payload.movie}
+        onSelectMovie1: (state, { payload }) => {
+            state.selectedMovie.user1 = { ...payload.movie }
             state.results = []
             state.isSelected = true
         },
-        onSelectMovie2:(state, { payload }) =>{
-            state.selectedMovie.user2 = {...payload.movie}
+        onSelectMovie2: (state, { payload }) => {
+            state.selectedMovie.user2 = { ...payload.movie }
             state.results = []
             state.isSelected = true
         },
-        addToArrayBase:( state, { payload }) =>{
-            state.arrayBase = state.arrayBase.concat(payload)
-        }, 
-        addRecomendedMovie: ( state, { payload }) =>{
+        addRecomendedMovie: (state, { payload }) => {
             state.recomendedMovie = payload
         },
-        onMatch: ( state ) =>{
+        onMatch: (state) => {
             state.match = true
         },
-        onNoRecomended:( state ) =>{
+        onNoRecomended: (state) => {
             state.noRecomended = true
         },
-        onClear:( state) =>{
+        onClear: (state) => {
             state.noRecomended = false
             state.isSelected = false
             state.selectedMovie.user1 = {}
             state.selectedMovie.user2 = {}
             state.match = false
             state.arrayBase = []
-        }
+            state.genresIds = ''
+            state.recomendedMovie = {}
+            state.dataIsLoaded = false
+            state.providersSearched = []
+        },
+        onEditGenresIds: (state, {payload} ) => {
+            state.genresIds = payload
+        },
+        onLoadIsCompleted:( state ) =>{
+            state.dataIsLoaded = true
+        },
+        
 
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { onSearch, onSelectMovie1, onSelectMovie2, addToArrayBase, addRecomendedMovie, onMatch, onNoRecomended, onClear } = searchSlice.actions
+export const { 
+    onSearch, 
+    onSelectMovie1, 
+    onSelectMovie2, 
+    addToArrayBase, 
+    addRecomendedMovie, 
+    onMatch, 
+    onNoRecomended, 
+    onClear, 
+    onEditGenresIds,
+    onLoadIsCompleted,
+} = searchSlice.actions

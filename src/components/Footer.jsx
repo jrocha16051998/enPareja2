@@ -11,7 +11,7 @@ export const Footer = () => {
                 <p> Created By Andrés</p>
             </div>
             <div className='row justify-content-center'>
-                <div className='col-1'>
+                <div className='col-1 m-1'>
                     <a 
                         href='https://github.com/jrocha16051998' 
                         target='_blank' 
@@ -19,7 +19,7 @@ export const Footer = () => {
                         <img className='img-footer'src={github} alt='link github' />
                     </a>
                 </div>
-                <div className='col-1'>
+                <div className='col-1 m-1'>
                     <a 
                         href='https://www.linkedin.com/in/juan-andr%C3%A9s-rocha-romano-b73b7323b/' 
                         target='_blank' 
@@ -27,7 +27,7 @@ export const Footer = () => {
                         <img className='img-footer'src={ld} alt='link Linkedin' />
                     </a>
                 </div>
-                <div className='col-1'>
+                <div className='col-1 m-1'>
                     <a 
                         href='https://www.instagram.com/jarrche/' 
                         target='_blank' 

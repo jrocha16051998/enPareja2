@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Info = () => {
     return (
-        <div className='container align-items-center'>
+        <div className='container align-self-center pt-3 '>
             <div className='row text-center'>
                 <div className='row'>
                     <hr />
@@ -16,13 +16,8 @@ export const Info = () => {
                 <div className='row text-center'>
                     <h3> ¿Cómo se encuentra la película recomendada? </h3>
                     <p className='p-1'>
-                    Para encontrar la película recomendada se obienten películas similares a cada una de las seleccionadas
-                    y se comparan entre si.
-                        <br/>
-                    Las películas similares estan basadas en palabras claves y generos,
-                    por lo cual la recomendación debería ser similar a las seleccionadas.
-                    Como máximo se comparan 4000 películas, si no se encuetra una recomendación es porque las películas 
-                    no son muy compatibles entre si y se deberia probar con otras
+                    Para encontrar la película recomendada se realiza una busqueda basada en los géneros de ambas pèliculas seleccionadas.
+                    Ademas de esto se puede incluir el proveedor de streaming que se prefiera o por defecto se no se aplicará este filtro.
                     </p>
                     <hr />
                 </div>

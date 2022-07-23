@@ -6,10 +6,9 @@ import { onModalChange } from '../store/uiSclice'
 import { ModalProvider } from './ModalProviders'
 import { Spiner } from './Spiner'
 
-export const ResultCard = ( {id, page} ) => {
+export const ResultCard = ( {id} ) => {
     const dispatch = useDispatch()
     const { data, isLoading, isSuccess } = useGetMovieByIdQuery( id )
-    const recomendationLvl = (100 - page) 
     const handleOpenModal = () =>{
         dispatch( onModalChange() )
     }
@@ -51,15 +50,7 @@ export const ResultCard = ( {id, page} ) => {
                                     }
                                 </ul>
                                 
-                                <h5 className={`
-                                    ${recomendationLvl > 79 
-                                        ? 'recomendation-text-high' 
-                                        : recomendationLvl < 79 
-                                        && recomendationLvl > 20 
-                                        ?  'recomendation-text-mid' 
-                                        : recomendationLvl < 21 && 'recomendation-text-low' }
-                                     `}> 
-                                    {recomendationLvl}% recomendado </h5>
+                               
                             
                                     
                                 <button 

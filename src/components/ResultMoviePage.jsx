@@ -1,8 +1,8 @@
-import React, {  useEffect, useState } from 'react'
+import React, {  useEffect} from 'react'
 import {  useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector} from 'react-redux/es/exports'
-import { useGetSimilarQuery } from '../store/apis/moviesApi'
-import { addRecomendedMovie, addToArrayBase, onClear, onMatch, onNoRecomended } from '../store/searchSlice'
+import { useGetDiscoverQuery,} from '../store/apis/moviesApi'
+import { addRecomendedMovie, onClear, onEditGenresIds, onMatch,} from '../store/searchSlice'
 import { Header } from './Header'
 import { ResultCard } from './ResultCard'
 import { Spiner } from './Spiner'
@@ -11,73 +11,72 @@ import { Element } from 'react-scroll'
 import { Info } from './Info'
 import { BtnToTop } from './BtnToTop'
 import { animateScroll as scroll} from 'react-scroll'
+import { Footer } from './Footer'
 
+let genresToAdd = []
 
 
 export const ResultMoviePage = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [page, setPage] = useState ( 1 )
-    const { selectedMovie, arrayBase, recomendedMovie, match, noRecomended} = useSelector( state => state.search)
+    const { selectedMovie, recomendedMovie, match, noRecomended, genresIds,} = useSelector( state => state.search)
     const { user1, user2 }  = selectedMovie
-    useEffect(() => {
-        
-        scroll.scrollToTop({duration: 20, smooth:true})
-    
-    }, [])
-    
- 
+    const { genre_ids} = user1
+    const { genre_ids : genre_ids2} = user2
+    const { selectedProviders } = useSelector( state => state.searchProviders)
+    //const optionsToWatch = '&with_watch_monetization_types=flatrate,buy,rent'
+    const providers = selectedProviders.map( provider => provider.provider_id).join('|')
 
     useEffect(() => {
-        
+        scroll.scrollToTop({duration: 20, smooth:true})
         if(Object.keys(user1).length === 0 || Object.keys(user2).length === 0 ) {
             dispatch( onClear() )
             dispatch( onClearUi())
             navigate('/')
+
         }else{
-            
             if(user1.id === user2.id){
                 dispatch(onMatch())
                 dispatch(addRecomendedMovie(user1))
             }
-
         }
-        
-    
-        
     }, [])
 
-
+    useEffect(() => {
+        
+        genre_ids?.map(id =>{
+            !genre_ids2.includes(id) && genresToAdd.push(id)
+        })
+        genre_ids2?.map( id =>{
+            !genre_ids.includes(id) && genresToAdd.push(id)
+        })
+        genresToAdd.length > 0 && dispatch( onEditGenresIds( genresToAdd.toString() ))
+        
+        
+    }, [])
     
-    let id = user1.id
-    const { data: data1, isSuccess: isSuccess1} = useGetSimilarQuery({ id, page })
+    const { data, isSuccess,} = useGetDiscoverQuery({genresIds, providers},{ skip: genresIds.length === 0})
+   
     
-    id  = user2.id 
-    const { data: data2 , isSuccess: isSuccess2} = useGetSimilarQuery({ id , page  })
+    
     
     useEffect(() => {
         
-        if( isSuccess1 && isSuccess2 && match === false && noRecomended === false){
-           
-            dispatch( addToArrayBase( data1.results ) )
-            arrayBase.map( movie =>{
-                data2.results.map( movie2 =>{
-                    if( movie2.id === movie.id ){
-                        dispatch( onMatch() )
-                        dispatch( addRecomendedMovie( movie ))
-                    }
-                })
-            })
+        if(data?.results?.length > 0 ){
+            dispatch( addRecomendedMovie( data.results[0]))
+            dispatch( onMatch())
+            console.log(' addrecomendd y match')
             
-            !match && setPage( page +1) 
+        }else   if( !match && isSuccess ){
+            
+            genresToAdd.pop()
+            console.log(genresToAdd)
+            dispatch(onEditGenresIds ( genresToAdd.toString() ))
+            console.log(' succes y no match')
         }
         
-        page === 100  && dispatch( onNoRecomended() )
-    }, [isSuccess1 ,isSuccess2])
-    
-   
 
-   
+    }, [data])
 
     const handleBack = () =>{
         dispatch( onClear ())
@@ -89,14 +88,14 @@ export const ResultMoviePage = () => {
         <>
             <Header />
             {
-                !match && !noRecomended 
+                !match 
                 && 
                 <Spiner />
             }
             {
                 match && 
                     <>
-                        <ResultCard id={ recomendedMovie.id } page={page}/>
+                        <ResultCard id={ recomendedMovie.id } />
                         
                     </>
                     
@@ -117,6 +116,7 @@ export const ResultMoviePage = () => {
             <Element name='info'>
                 <Info />
             </Element>
+            <Footer/>
         </>
     )
 }

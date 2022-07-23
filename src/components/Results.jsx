@@ -15,7 +15,7 @@ export const Results = (  ) => {
             <div className={`row justify-content-center mt-1 ${ results.length === 0 && 'd-none'}`}>
                 <ul className="list-group col-9 mt-1 overflow-auto" style={{maxHeight: '500px'}}>
                     {
-                        results.map(movie =>(
+                        results?.map(movie =>(
                             <li
                                 key={movie.id} 
                                 className="list-group-item li-results"

@@ -17,7 +17,8 @@ export const Body = () => {
     const {  isConfirmed1, isConfirmed2} = useSelector( state => state.ui)
 
     useEffect(() => {
-        isConfirmed1 && isConfirmed2 && navigate('./result')
+        
+        isConfirmed1 && isConfirmed2 && navigate('./select-providers')
     
     }, [isConfirmed1, isConfirmed2])
     

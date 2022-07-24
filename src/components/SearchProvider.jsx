@@ -24,7 +24,7 @@ export const SearchProvider = () => {
     
     const handleInputChange = ({ target }) =>{
         setFormSearch( target.value )
-        dispatch ( onSearchProviders( results.filter(provider => provider.provider_name.toLowerCase().includes(formSearch))))
+        dispatch ( onSearchProviders( results.filter(provider => provider.provider_name.toLowerCase().includes(formSearch.toLowerCase()))))
     }
     
     const handleClickOnProvider = ({ provider_name, provider_id}) =>{
@@ -70,9 +70,9 @@ export const SearchProvider = () => {
                     </input>
                     {
                         formSearch.length > 0 &&
-                    <ul className="list-group col-9 w-50 mt-1 overflow-auto" style={{maxHeight: '500px'}}>
+                    <ul className="list-group col-9 w-50 mt-1 overflow-auto" style={{maxHeight: '400px'}}>
                         {
-                            providersSearched?.map((provider) =>(
+                            providersSearched.map((provider) =>(
                                 <li
                                     key={ provider.provider_id } 
                                     className="list-group-item li-results"

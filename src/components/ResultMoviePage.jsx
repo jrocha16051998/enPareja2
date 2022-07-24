@@ -32,7 +32,7 @@ export const ResultMoviePage = () => {
         if(Object.keys(user1).length === 0 || Object.keys(user2).length === 0 ) {
             dispatch( onClear() )
             dispatch( onClearUi())
-            navigate('/')
+            navigate('./')
 
         }else{
             if(user1.id === user2.id){

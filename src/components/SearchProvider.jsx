@@ -52,7 +52,7 @@ export const SearchProvider = () => {
         <>
             <Header />
             <h3 className='text-center pt-3'>Elige tus plataformas de películas favoritas</h3>
-            <p className='text-center pt-2'>Si eliges la alguna plataforma nos encargaremos de recomendarte alguna pelicula que se encuentre en ella
+            <p className='text-center p-3'>Si eliges la alguna plataforma nos encargaremos de recomendarte alguna pelicula que se encuentre en ella
                 <br />
                 Puedes continuar sin seleccionar ninguna y se te recomendará de cualquier plataforma
             </p>

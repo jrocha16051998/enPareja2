@@ -1,23 +1,21 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-
 import { scroller } from 'react-scroll'
+import { useSearchSlice } from '../hooks'
 import { useGetPopularQuery } from '../store/apis/moviesApi'
-import { onSelectMovie1, onSelectMovie2 } from '../store/searchSlice'
+
 
 export const Suggestions = () => {
-    const dispatch = useDispatch()
-    const { selectedMovie } = useSelector ( state => state.search )
+    const { selectMovie1, selectMovie2, selectedMovie} = useSearchSlice()
     const { data = [], } = useGetPopularQuery() 
     const { results = [] }  = data
     
     const handleClickMovie = (movie) =>{
         if(Object.keys(selectedMovie.user1).length === 0) {
-            dispatch( onSelectMovie1( {movie} ))
+            selectMovie1( movie )
             scroller.scrollTo('search1')
             
         }else{
-            dispatch( onSelectMovie2( {movie} ))
+            selectMovie2( movie)
             scroller.scrollTo('search2')
         }
     }

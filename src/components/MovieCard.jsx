@@ -1,18 +1,16 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux/es/hooks/useSelector'
-import { onConfirm1} from '../store/uiSclice'
+import { useSearchSlice, useUiSlice } from '../hooks'
 
 export const MovieCard = () => {
-    const dispatch = useDispatch()
     
+    const { confirm1, isConfirmed1 } = useUiSlice()
     const [ onHidde, setOnHidde ] = useState( false )
-    const { selectedMovie } = useSelector( state => state.search )
-    const { isConfirmed1} = useSelector( state => state.ui )
+    const { selectedMovie } = useSearchSlice()
+    
     const {title, vote_average, overview, backdrop_path} = selectedMovie.user1
 
-    const handleConfirm = async () =>{
-        dispatch ( onConfirm1() )
+    const handleConfirm = () =>{
+        confirm1()
     }
 
     const handleHidde = () =>{

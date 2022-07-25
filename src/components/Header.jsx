@@ -1,17 +1,15 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { scroller } from 'react-scroll'
-import { onClear } from '../store/searchSlice'
-import { onClearUi } from '../store/uiSclice'
-
+import { useSearchSlice, useUiSlice } from '../hooks'
 
 export const Header = () => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const { clearUi } = useUiSlice()
+    const { clear } = useSearchSlice()
     const toMain = () =>{
-        dispatch( onClearUi())
-        dispatch( onClear ())
+        clearUi()
+        clear()
         navigate('/')
     }
     const handleBtnInfo = () =>{

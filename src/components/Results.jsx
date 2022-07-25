@@ -1,13 +1,11 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux/es/exports'
 
-import { onSelectMovie1, onSelectMovie2 } from '../store/searchSlice'
+import { useSearchSlice } from '../hooks'
 
 export const Results = (  ) => {
-    const { results = [], user}  = useSelector( state => state.search)
-    const dispatch = useDispatch()
+    const { selectMovie1, selectMovie2, results, user} =  useSearchSlice()
     const handleSelectMovie =( movie ) =>{
-        dispatch( user === 1 ? onSelectMovie1( {movie} ) : onSelectMovie2( {movie} ))
+        user === 1 ? selectMovie1( movie ) : selectMovie2( movie )
     }
     
     return (

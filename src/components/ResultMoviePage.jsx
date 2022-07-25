@@ -1,25 +1,25 @@
 import React, {  useEffect} from 'react'
 import {  useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector} from 'react-redux/es/exports'
+import {  useSelector} from 'react-redux/es/exports'
 import { useGetDiscoverQuery,} from '../store/apis/moviesApi'
-import { addRecomendedMovie, onClear, onEditGenresIds, onMatch,} from '../store/searchSlice'
 import { Header } from './Header'
 import { ResultCard } from './ResultCard'
 import { Spiner } from './Spiner'
-import { onClearUi } from '../store/uiSclice'
 import { Element } from 'react-scroll'
 import { Info } from './Info'
 import { BtnToTop } from './BtnToTop'
 import { animateScroll as scroll} from 'react-scroll'
 import { Footer } from './Footer'
+import { useSearchSlice, useUiSlice } from '../hooks'
 
 let genresToAdd = []
 
 
 export const ResultMoviePage = () => {
+    const {selectedMovie, recomendedMovie, match, noRecomended, genresIds, addRecomended, onCallMatch, clear, editGenres, onCallNoRecomended} = useSearchSlice ()
     const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const { selectedMovie, recomendedMovie, match, noRecomended, genresIds,} = useSelector( state => state.search)
+   
+    const { clearUi } = useUiSlice()
     const { user1, user2 }  = selectedMovie
     const { genre_ids} = user1
     const { genre_ids : genre_ids2} = user2
@@ -30,15 +30,17 @@ export const ResultMoviePage = () => {
     useEffect(() => {
         scroll.scrollToTop({duration: 20, smooth:true})
         if(Object.keys(user1).length === 0 || Object.keys(user2).length === 0 ) {
-            dispatch( onClear() )
-            dispatch( onClearUi())
+            clear()
+            clearUi()
             navigate('/')
-            
+                
 
         }else{
             if(user1.id === user2.id){
-                dispatch(onMatch())
-                dispatch(addRecomendedMovie(user1))
+                onCallMatch()
+                //dispatch(addRecomendedMovie(user1))
+                addRecomended(user1)
+
             }
         }
     }, [])
@@ -51,7 +53,7 @@ export const ResultMoviePage = () => {
         genre_ids2?.map( id =>{
             !genre_ids.includes(id) && genresToAdd.push(id)
         })
-        genresToAdd.length > 0 && dispatch( onEditGenresIds( genresToAdd.toString() ))
+        genresToAdd.length > 0 && editGenres( genresToAdd.toString() )
         
         
     }, [])
@@ -64,24 +66,24 @@ export const ResultMoviePage = () => {
     useEffect(() => {
         
         if(data?.results?.length > 0 ){
-            dispatch( addRecomendedMovie( data.results[0]))
-            dispatch( onMatch())
+            addRecomended( data.results[0])
+            onCallMatch()
             
             
-        }else   if( !match && isSuccess ){
-            
+        }else if( !match && isSuccess && genre_ids !== '' ){
             genresToAdd.pop()
-            
-            dispatch(onEditGenresIds ( genresToAdd.toString() ))
-           
+            editGenres ( genresToAdd.toString() ) 
         }
+
+        genresIds.length === 0 && onCallNoRecomended()
+        
         
 
     }, [data])
 
     const handleBack = () =>{
-        dispatch( onClear ())
-        dispatch( onClearUi())
+        clear()
+        clearUi()
         navigate('/')
     }
 
@@ -89,7 +91,7 @@ export const ResultMoviePage = () => {
         <>
             <Header />
             {
-                !match 
+                !match && !noRecomended
                 && 
                 <Spiner />
             }

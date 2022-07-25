@@ -1,16 +1,14 @@
 import React from 'react'
-    
-import { useDispatch } from 'react-redux'
+import { useUiSlice } from '../hooks'
 import { useGetMovieByIdQuery } from '../store/apis/moviesApi'
-import { onModalChange } from '../store/uiSclice'
 import { ModalProvider } from './ModalProviders'
 import { Spiner } from './Spiner'
 
 export const ResultCard = ( {id} ) => {
-    const dispatch = useDispatch()
+    const { modalChange } = useUiSlice()
     const { data, isLoading, isSuccess } = useGetMovieByIdQuery( id )
     const handleOpenModal = () =>{
-        dispatch( onModalChange() )
+        modalChange()
     }
     
     return (

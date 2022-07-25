@@ -13,7 +13,7 @@ export const searchProvidersSlice = createSlice({
             state.providersSearched = payload
         },
         onSelectedProviders:( state, { payload }) =>{
-            state.selectedProviders.push( payload)
+            state.selectedProviders.push( payload )
         },
         onDelProviders:( state, { payload }) =>{
             state.selectedProviders.splice(payload,1)

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { Results } from './Results'
 import { Search } from './Search'
 import { Suggestions } from './Suggestions'
-import { useSelector } from 'react-redux/es/exports'
 import { MovieCard } from './MovieCard'
 import { MovieCard2 } from './MovieCard2'
 import { useNavigate } from 'react-router-dom'
@@ -10,11 +9,12 @@ import { Info } from './Info'
 import { BtnToTop } from './BtnToTop'
 import { Element } from 'react-scroll'
 import { Footer } from './Footer'
+import { useSearchSlice, useUiSlice } from '../hooks'
 
 export const Body = () => {
     const navigate = useNavigate()
-    const { user : currentUser, selectedMovie } = useSelector( state => state.search)
-    const {  isConfirmed1, isConfirmed2} = useSelector( state => state.ui)
+    const { user : currentUser, selectedMovie } = useSearchSlice()
+    const {  isConfirmed1, isConfirmed2 } = useUiSlice()
 
     useEffect(() => {
         

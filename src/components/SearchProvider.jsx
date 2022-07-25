@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { useGetSearchProvidersQuery } from '../store/apis/moviesApi'
-import { onDelProviders, onSearchProviders, onSelectedProviders } from '../store/searchProvidersSlice'
 import { Footer } from './Footer'
 import { Header } from './Header'
 import { Info } from './Info'
 import x from '../images/x.svg'
 import { useNavigate } from 'react-router-dom'
 import { animateScroll as scroll} from 'react-scroll'
+import { useSearchProvidersSlice } from '../hooks'
 
 export const SearchProvider = () => {
-    const { providersSearched, selectedProviders } = useSelector( state => state.searchProviders )
-    const dispatch = useDispatch()
+    const { providersSearched, selectedProviders, searchProviders, selectProviders, deleteProviders} = useSearchProvidersSlice()
     const [formSearch, setFormSearch] = useState('')
     const { data = [] } = useGetSearchProvidersQuery()
     const { results = [] } = data
@@ -24,7 +22,7 @@ export const SearchProvider = () => {
     
     const handleInputChange = ({ target }) =>{
         setFormSearch( target.value )
-        dispatch ( onSearchProviders( results.filter(provider => provider.provider_name.toLowerCase().includes(formSearch.toLowerCase()))))
+        searchProviders( results.filter(provider => provider.provider_name.toLowerCase().includes(formSearch.toLowerCase())))
     }
     
     const handleClickOnProvider = ({ provider_name, provider_id}) =>{
@@ -34,7 +32,7 @@ export const SearchProvider = () => {
         })
         
         if ( !providerIslisted){
-            dispatch( onSelectedProviders( {provider_name, provider_id}) )
+            selectProviders( {provider_name, provider_id}) 
             setFormSearch('')
         }else{
             setFormSearch('')
@@ -42,7 +40,7 @@ export const SearchProvider = () => {
     }
 
     const handleClickRemoveProvider = (index) =>{
-        dispatch( onDelProviders( index ))
+        deleteProviders( index )
     }
     const handleClickNext = () =>{
         navigate('/result')

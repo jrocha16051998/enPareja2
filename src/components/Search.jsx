@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useSearchSlice } from '../hooks'
 import { useGetSearchQuery } from '../store/apis/moviesApi'
-import { onSearch } from '../store/searchSlice'
-
-
-
 
 export const Search = ({ user }) => {
+    const { search } = useSearchSlice()
     const [toSearch, setToSearch] = useState('')
-    const dispatch = useDispatch()
     const [formSearch, setFormSearch] = useState('')
     const { data = [] } = useGetSearchQuery(toSearch, { skip: toSearch.length < 1})
     const { results = [] } = data
 
     useEffect(() => {
-        results.length > 1 && dispatch( onSearch( { results, user} ))
+        results.length > 1 && search( results, user)
         
         
     }, [results])
@@ -23,10 +19,10 @@ export const Search = ({ user }) => {
         setFormSearch(  target.value )
         
     }
-    const handleSearch = async () =>{
+    const handleSearch = () =>{
         setToSearch( formSearch )
         
-        dispatch( onSearch( { results, user} ))
+        search( results, user)
     }
     
     return (

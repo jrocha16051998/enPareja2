@@ -1,9 +1,9 @@
 import React from 'react'
 import Modal from 'react-modal'
-import { useDispatch, useSelector } from 'react-redux'
 import { makerLinkProvider } from '../helpers/makerLinkProvider'
+import { useSearchSlice, useUiSlice } from '../hooks'
 import { useGetProvidersQuery } from '../store/apis/moviesApi'
-import { onModalChange } from '../store/uiSclice'
+
 
 const customStyles = {
     content: {
@@ -21,14 +21,11 @@ const customStyles = {
 Modal.setAppElement('#root')
 
 export const ModalProvider = ( {id}) => {
-   
-    const { isModalOpen } = useSelector( state => state.ui)
-    const { recomendedMovie } = useSelector( state => state.search)
+    const { modalChange, isModalOpen } = useUiSlice()
+    const { recomendedMovie } = useSearchSlice()
     
-    const dispatch = useDispatch()
-
     function closeModal() {
-        dispatch( onModalChange ())
+        modalChange()
     }
 
     const { data } = useGetProvidersQuery( id )
@@ -92,7 +89,7 @@ export const ModalProvider = ( {id}) => {
                             <div className='col-lg-3 row-md'>
                                 <h5>Alquilar</h5>
                                 <ul>
-                                    { //TODO: hacer href a cada pelicula a su distribuidor
+                                    { 
                                         data.results.ES?.rent?.map( provider =>(
                                             <li key={provider.provider_id} className='p-1'>
                                                 <a 
@@ -113,7 +110,7 @@ export const ModalProvider = ( {id}) => {
                     onRequestClose={closeModal}
                     style={customStyles}
                     contentLabel="modal no reults">
-                    <h3>Upsss.. parece que no hay provedores de streaming  que tengan esta pelicula</h3>
+                    <h4>Upsss.. parece que no hay ninguna plataforma de streaming que tengan esta pelicula</h4>
                 </Modal>
             
             }

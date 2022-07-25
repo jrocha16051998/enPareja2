@@ -8,14 +8,10 @@ export const searchSlice = createSlice({
         user: 1,
         selectedMovie: { user1: {}, user2: {} },
         isSelected: false,
-        arrayBase: [],
         recomendedMovie: {},
         match: false,
         noRecomended: false,
         genresIds: '',
-        dataIsLoaded: false,
-        
-
     },
     reducers: {
         onSearch: (state, { payload }) => {
@@ -53,14 +49,11 @@ export const searchSlice = createSlice({
             state.recomendedMovie = {}
             state.dataIsLoaded = false
             state.providersSearched = []
+            state.noRecomended = false
         },
         onEditGenresIds: (state, {payload} ) => {
             state.genresIds = payload
         },
-        onLoadIsCompleted:( state ) =>{
-            state.dataIsLoaded = true
-        },
-        
 
     },
 })
@@ -76,5 +69,4 @@ export const {
     onNoRecomended, 
     onClear, 
     onEditGenresIds,
-    onLoadIsCompleted,
 } = searchSlice.actions

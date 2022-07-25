@@ -70,15 +70,14 @@ export const ResultMoviePage = () => {
             onCallMatch()
             
             
-        }else if( !match && isSuccess && genre_ids !== '' ){
+        }else if( !match && isSuccess){
             genresToAdd.pop()
             editGenres ( genresToAdd.toString() ) 
         }
-
-        genresIds.length === 0 && onCallNoRecomended()
-        
-        
-
+        console.log(genresToAdd, isSuccess)
+        if( genresToAdd.length === 0 && isSuccess){
+            onCallNoRecomended()
+        }
     }, [data])
 
     const handleBack = () =>{

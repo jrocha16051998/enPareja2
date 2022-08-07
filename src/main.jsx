@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { App } from './components/App'
 import { Provider } from 'react-redux'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Routes, Route, HashRouter } from 'react-router-dom'
 
 
 import './index.css'
@@ -13,7 +13,7 @@ import { SearchProvider } from './components/SearchProvider'
 ReactDOM.createRoot(document.getElementById('root')).render(
     
     <Provider store={ store}>
-        <BrowserRouter>
+        <HashRouter>
             <Routes>
                 <Route path='/' element={<App />} ></Route>
                 <Route path='/result' element={<ResultMoviePage />} ></Route>
@@ -22,7 +22,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             </Routes>
         
 
-        </BrowserRouter>
+        </HashRouter>
         
     </Provider>
     

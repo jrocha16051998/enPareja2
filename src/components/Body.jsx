@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { Info } from './Info'
 import { BtnToTop } from './BtnToTop'
 import { Element } from 'react-scroll'
-import { Footer } from './Footer'
+
 import { useSearchSlice, useUiSlice } from '../hooks'
 
 export const Body = () => {
@@ -66,7 +66,6 @@ export const Body = () => {
             </Element>
             
             <BtnToTop />
-            <Footer />
             
 
 

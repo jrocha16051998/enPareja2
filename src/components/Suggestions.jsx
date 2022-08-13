@@ -21,7 +21,7 @@ export const Suggestions = () => {
     }
     return (
         <div className='container'>
-            <h4 className='pt-4 text-center'>Populares de hoy</h4>
+            <h4 className='pt-4 text-center'>Películas populares</h4>
             <div className="row pt-2 m-1 justify-content-center ">
                 
                 { 

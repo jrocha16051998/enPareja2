@@ -1,14 +1,19 @@
 import React from 'react'
-import { useUiSlice } from '../hooks'
+import { useSearchSlice, useUiSlice } from '../hooks'
 import { useGetMovieByIdQuery } from '../store/apis/moviesApi'
 import { ModalProvider } from './ModalProviders'
 import { Spiner } from './Spiner'
 
-export const ResultCard = ( {id} ) => {
+export const ResultCard = ( {id, results = 0} ) => {
+    const { addIndexMovie, indexMovie } = useSearchSlice()
     const { modalChange } = useUiSlice()
     const { data, isLoading, isSuccess } = useGetMovieByIdQuery( id )
     const handleOpenModal = () =>{
         modalChange()
+    }
+
+    const handleChangeMovie = () =>{
+        addIndexMovie()
     }
     
     return (
@@ -52,9 +57,15 @@ export const ResultCard = ( {id} ) => {
                             
                                     
                                 <button 
-                                    className='btn btn-primary mt-2' 
+                                    className='btn btn-primary mt-2 ' 
                                     onClick={ handleOpenModal }
                                 >¿Dónde ver?</button>
+                                <button 
+                                    className='btn btn-primary mt-2 ms-sm-3' 
+                                    onClick={ handleChangeMovie }
+                                    disabled={ results === 0 ? true : results.length === (indexMovie + 1) ? true: false}
+                                    
+                                >Recomendar otra</button>
                                 
                             </div>
                         </div>

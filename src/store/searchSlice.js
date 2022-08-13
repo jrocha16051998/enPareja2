@@ -12,6 +12,7 @@ export const searchSlice = createSlice({
         match: false,
         noRecomended: false,
         genresIds: '',
+        indexMovie: 0
     },
     reducers: {
         onSearch: (state, { payload }) => {
@@ -50,10 +51,14 @@ export const searchSlice = createSlice({
             state.dataIsLoaded = false
             state.providersSearched = []
             state.noRecomended = false
+            state.indexMovie = 0
         },
         onEditGenresIds: (state, {payload} ) => {
             state.genresIds = payload
         },
+        onAddIndexMovie: ( state ) =>{
+            state.indexMovie ++
+        }
 
     },
 })
@@ -69,4 +74,5 @@ export const {
     onNoRecomended, 
     onClear, 
     onEditGenresIds,
+    onAddIndexMovie
 } = searchSlice.actions

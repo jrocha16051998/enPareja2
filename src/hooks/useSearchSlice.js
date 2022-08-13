@@ -1,10 +1,10 @@
 
 import { useDispatch, useSelector } from 'react-redux'
-import { addRecomendedMovie, onClear, onEditGenresIds, onMatch, onNoRecomended, onSearch, onSelectMovie1, onSelectMovie2 } from '../store/searchSlice'
+import { addRecomendedMovie, onAddIndexMovie, onClear, onEditGenresIds, onMatch, onNoRecomended, onSearch, onSelectMovie1, onSelectMovie2 } from '../store/searchSlice'
 
 export const useSearchSlice = () => {
     const dispatch = useDispatch()
-    const { results, user, selectedMovie, isSelected, noRecomended, genresIds, match, recomendedMovie} = useSelector( state => state.search)
+    const { results, user, selectedMovie, isSelected, noRecomended, genresIds, match, recomendedMovie, indexMovie} = useSelector( state => state.search)
 
     const search = (results, user) =>{
         dispatch( onSearch( { results, user} ))
@@ -30,6 +30,9 @@ export const useSearchSlice = () => {
     const editGenres = (genres) =>{
         dispatch( onEditGenresIds( genres ))
     }
+    const addIndexMovie = () =>{
+        dispatch( onAddIndexMovie())
+    }
 
 
 
@@ -42,6 +45,7 @@ export const useSearchSlice = () => {
         onCallNoRecomended,
         clear,
         editGenres,
+        addIndexMovie,
         results, 
         user, 
         selectedMovie, 
@@ -50,6 +54,7 @@ export const useSearchSlice = () => {
         genresIds, 
         match,
         recomendedMovie,
+        indexMovie,
 
     }
 }

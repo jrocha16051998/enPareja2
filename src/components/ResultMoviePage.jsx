@@ -1,6 +1,6 @@
 import React, {  useEffect} from 'react'
 import {  useNavigate } from 'react-router-dom'
-import {  useSelector} from 'react-redux/es/exports'
+import {  useSelector } from 'react-redux/es/exports'
 import { useGetDiscoverQuery,} from '../store/apis/moviesApi'
 import { Header } from './Header'
 import { ResultCard } from './ResultCard'
@@ -16,15 +16,14 @@ let genresToAdd = []
 
 
 export const ResultMoviePage = () => {
-    const {selectedMovie, recomendedMovie, match, noRecomended, genresIds, addRecomended, onCallMatch, clear, editGenres, onCallNoRecomended} = useSearchSlice ()
+    const {selectedMovie, recomendedMovie, match, noRecomended, genresIds,indexMovie, addRecomended, onCallMatch, clear, editGenres, onCallNoRecomended} = useSearchSlice ()
     const navigate = useNavigate()
-   
+    
     const { clearUi } = useUiSlice()
     const { user1, user2 }  = selectedMovie
     const { genre_ids} = user1
     const { genre_ids : genre_ids2} = user2
     const { selectedProviders } = useSelector( state => state.searchProviders)
-    //const optionsToWatch = '&with_watch_monetization_types=flatrate,buy,rent'
     const providers = selectedProviders.map( provider => provider.provider_id).join('|')
 
     useEffect(() => {
@@ -38,9 +37,7 @@ export const ResultMoviePage = () => {
         }else{
             if(user1.id === user2.id){
                 onCallMatch()
-                //dispatch(addRecomendedMovie(user1))
                 addRecomended(user1)
-
             }
         }
     }, [])
@@ -58,7 +55,7 @@ export const ResultMoviePage = () => {
         
     }, [])
     
-    const { data, isSuccess,} = useGetDiscoverQuery({genresIds, providers},{ skip: genresIds.length === 0})
+    const { data, isSuccess,} =  useGetDiscoverQuery({genresIds, providers},{ skip: genresIds.length === 0})
    
     
     
@@ -66,7 +63,7 @@ export const ResultMoviePage = () => {
     useEffect(() => {
         
         if(data?.results?.length > 0 ){
-            addRecomended( data.results[0])
+            addRecomended( data.results[indexMovie])
             onCallMatch()
             
             
@@ -78,7 +75,7 @@ export const ResultMoviePage = () => {
         if( genresToAdd.length === 0 && isSuccess){
             onCallNoRecomended()
         }
-    }, [data])
+    }, [data, indexMovie])
 
     const handleBack = () =>{
         clear()
@@ -97,7 +94,7 @@ export const ResultMoviePage = () => {
             {
                 match && 
                     <>
-                        <ResultCard id={ recomendedMovie.id } />
+                        <ResultCard id={ recomendedMovie.id } results={data?.results}/>
                         
                     </>
                     

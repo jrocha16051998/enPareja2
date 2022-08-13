@@ -24,7 +24,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient( to right, #9CB4CC, #F2D7D9 5% 95%, #9CB4CC );
+  background: linear-gradient( to right, #9CB4CC, #F2D7D9 3% 97%, #9CB4CC );
   
 }
 
@@ -46,7 +46,7 @@ li:hover{
   width: 1rem;
 }
 .header{
-  background: linear-gradient( to right, #9CB4CC, #F2D7D9 5% 95%, #9CB4CC );
+  background: linear-gradient( to right, #9CB4CC, #F2D7D9 3% 97%, #9CB4CC );
 }
 .btn-outline-success{
   border-color: #748DA6;

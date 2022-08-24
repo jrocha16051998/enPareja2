@@ -1,8 +1,8 @@
 import React from 'react'
-import { useSearchSlice, useUiSlice } from '../hooks'
-import { useGetMovieByIdQuery } from '../store/apis/moviesApi'
+import { useSearchSlice, useUiSlice } from '../../hooks'
+import { useGetMovieByIdQuery } from '../../store/apis/moviesApi'
 import { ModalProvider } from './ModalProviders'
-import { Spiner } from './Spiner'
+import { Spiner } from '../Spiner'
 
 export const ResultCard = ( {id, results = 0} ) => {
     const { addIndexMovie, indexMovie } = useSearchSlice()

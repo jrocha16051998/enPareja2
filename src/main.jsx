@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { App } from './components/App'
+import { App } from './components/main/App'
 import { Provider } from 'react-redux'
 import { Routes, Route, HashRouter } from 'react-router-dom'
 
@@ -8,7 +8,7 @@ import { Routes, Route, HashRouter } from 'react-router-dom'
 import './index.css'
 import { store } from './store/store'
 import { ResultMoviePage } from './components/ResultMoviePage'
-import { SearchProvider } from './components/SearchProvider'
+import { SearchProvider } from './components/searchProviders/SearchProvider'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     

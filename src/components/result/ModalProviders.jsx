@@ -1,8 +1,8 @@
 import React from 'react'
 import Modal from 'react-modal'
-import { makerLinkProvider } from '../helpers/makerLinkProvider'
-import { useSearchSlice, useUiSlice } from '../hooks'
-import { useGetProvidersQuery } from '../store/apis/moviesApi'
+import { makerLinkProvider } from '../../helpers/makerLinkProvider'
+import { useSearchSlice, useUiSlice } from '../../hooks'
+import { useGetProvidersQuery } from '../../store/apis/moviesApi'
 
 
 const customStyles = {
@@ -64,7 +64,7 @@ export const ModalProvider = ( {id}) => {
                                             <li key={provider.provider_id} className='p-1'>
                                                 <a 
                                                     href={ makerLinkProvider(provider.provider_id, recomendedMovie.title )} 
-                                                    target='_blank' rel='noopener noreferrer'> { provider.provider_name + ' '}</a>
+                                                > { provider.provider_name + ' '}</a>
                                                 <img src={`https://image.tmdb.org/t/p/w500/${provider.logo_path}`} className='logo'/>  
                                             </li>
                                         ))

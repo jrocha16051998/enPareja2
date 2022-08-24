@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react'
-import { Results } from './Results'
-import { Search } from './Search'
+import { Results } from '../Results'
+import { Search } from '../Search'
 import { Suggestions } from './Suggestions'
 import { MovieCard } from './MovieCard'
 import { MovieCard2 } from './MovieCard2'
 import { useNavigate } from 'react-router-dom'
-import { Info } from './Info'
-import { BtnToTop } from './BtnToTop'
+
 import { Element } from 'react-scroll'
 
-import { useSearchSlice, useUiSlice } from '../hooks'
+import { useSearchSlice, useUiSlice } from '../../hooks'
 
 export const Body = () => {
     const navigate = useNavigate()
@@ -59,13 +58,11 @@ export const Body = () => {
                 </div>
             </div>
             <hr />
-            {<Suggestions /> }
+            <Suggestions /> 
 
-            <Element name='info'>
-                <Info />
-            </Element>
             
-            <BtnToTop />
+            
+            
             
 
 

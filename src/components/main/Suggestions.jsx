@@ -1,7 +1,7 @@
 import React from 'react'
 import { scroller } from 'react-scroll'
-import { useSearchSlice } from '../hooks'
-import { useGetPopularQuery } from '../store/apis/moviesApi'
+import { useSearchSlice } from '../../hooks'
+import { useGetPopularQuery } from '../../store/apis/moviesApi'
 
 
 export const Suggestions = () => {

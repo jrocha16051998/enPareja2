@@ -1,16 +1,12 @@
 import React, {  useEffect} from 'react'
 import {  useNavigate } from 'react-router-dom'
 import {  useSelector } from 'react-redux/es/exports'
-import { useGetDiscoverQuery,} from '../store/apis/moviesApi'
-import { Header } from './Header'
+import { useGetDiscoverQuery,} from '../../store/apis/moviesApi'
 import { ResultCard } from './ResultCard'
-import { Spiner } from './Spiner'
-import { Element } from 'react-scroll'
-import { Info } from './Info'
-import { BtnToTop } from './BtnToTop'
+import { Spiner } from '../Spiner'
 import { animateScroll as scroll} from 'react-scroll'
-import { Footer } from './Footer'
-import { useSearchSlice, useUiSlice } from '../hooks'
+import { useSearchSlice, useUiSlice } from '../../hooks'
+import { Layout } from '../../Layout/layout'
 
 let genresToAdd = []
 
@@ -71,7 +67,7 @@ export const ResultMoviePage = () => {
             genresToAdd.pop()
             editGenres ( genresToAdd.toString() ) 
         }
-        console.log(genresToAdd, isSuccess)
+
         if( genresToAdd.length === 0 && isSuccess){
             onCallNoRecomended()
         }
@@ -84,38 +80,38 @@ export const ResultMoviePage = () => {
     }
 
     return (
-        <>
-            <Header />
-            {
-                !match && !noRecomended
-                && 
-                <Spiner />
-            }
-            {
-                match && 
-                    <>
-                        <ResultCard id={ recomendedMovie.id } results={data?.results}/>
+        <Layout>
+            <>
+        
+                {
+                    !match && !noRecomended
+                    && 
+                    <Spiner />
+                }
+                {
+                    match && 
+                        <>
+                            <ResultCard id={ recomendedMovie.id } results={data?.results}/>
+                            
+                        </>
                         
-                    </>
-                    
-            }
-            {
-                noRecomended && 
-                    <div className='container mb-3'>
+                }
+                {
+                    noRecomended && 
+                        <div className='container mb-3'>
 
-                        <div className='row justify-content-center'>
-                            <h5 className='ml-4 p-5 text-center '>No se ha encontrado ninguna recomendación, por favor intentelo nuevamente con otras peliculas</h5>
-                            <button className='btn btn-outline-success w-25 h-25' onClick={ handleBack }> Volver </button>
+                            <div className='row justify-content-center'>
+                                <h5 className='ml-4 p-5 text-center '>No se ha encontrado ninguna recomendación, por favor intentelo nuevamente con otras peliculas</h5>
+                                <button className='btn btn-outline-success w-25 h-25' onClick={ handleBack }> Volver </button>
+                            </div>
+                            
                         </div>
-                        
-                    </div>
-            }
-            
-            <BtnToTop />
-            <Element name='info'>
-                <Info />
-            </Element>
-            <Footer/>
-        </>
+                }
+                
+            </>
+
+
+        </Layout>
+        
     )
 }
